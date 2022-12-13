@@ -62,6 +62,9 @@ class Graphe{
     unsigned int get_taille_c();
 
     float get_alt(unsigned int S );
+
+    //teste de régression
+    void testeRegression();
 };
 
 #endif

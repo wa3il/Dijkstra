@@ -54,7 +54,6 @@ class Dijkstra{
         //pour chaque noeud on affiche son ancestre
         void voronoi(Graphe & g,const std::string & filename);
         
-     
 };
 
 

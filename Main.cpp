@@ -2,6 +2,8 @@
 
 using namespace std;
 int main(int argc, char * argv[]){
+    Graphe test;
+    test.testeRegression();
 
     Graphe G (argv[1]) ;
     G.afficher();

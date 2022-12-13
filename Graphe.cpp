@@ -5,10 +5,9 @@ using namespace std;
 
 Graphe::Graphe():l(0),c(0),Sommet(nullptr){}
 
-Graphe::Graphe(unsigned int l , unsigned int c){
-  this-> l = l ;
-  this-> c = c ;
-  Sommet = new float [l*c] ;
+Graphe::Graphe(unsigned int li , unsigned int ci):l(li),c(ci){
+    assert((l*c)>=0);
+    Sommet = new float [l*c] ;
 }
 
 //affectation
@@ -134,12 +133,31 @@ void Graphe::setAltitude(unsigned int S , float v){
 }
 
 
-//fct membre calculant l'arrete entre 2sommets 
-    //cdt a et b existent et sont voisins 
-//float Graphe::valuation(unsigned int a){
-
 //accesseur
 unsigned int Graphe :: get_taille_l(){return l;}
 unsigned int Graphe :: get_taille_c(){return c;}
 
 float Graphe :: get_alt(unsigned int S ){return Sommet[S];}
+
+void Graphe :: testeRegression(){
+    Graphe g(2,1);
+    g.setAltitude(0,5);
+    g.setAltitude(1,2);
+
+    //l'indice sur tableau 1D
+    assert(g.indiceSommet(1,0) == 1);
+
+    //l'altitude du première élément
+    assert(g.altitude(0,0)==5);
+    assert(g.altitudeIndice(1)==2);
+
+    //on check si le premier et le deuxieme element sont voisin
+    assert(g.checkVoisin(0,1) == true);
+
+    //on a l'indice du voisin du sud
+    assert(g.indiceVoisin(0,0)== 1);
+
+    //teste de la valuation
+    assert(g.valuation(0,1)==3.16228);
+    
+}

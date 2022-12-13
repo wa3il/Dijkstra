@@ -7,6 +7,9 @@ float inf = std::numeric_limits<float>::infinity();
 
 Dijkstra ::Dijkstra(Graphe & g){
     taille = g.get_taille_l() * g.get_taille_c();
+
+    assert(taille>=0);
+
     PCD = new Noeud [taille];
     for(unsigned int i = 0; i<taille ; i++){
          PCD[i].dist =  inf;
@@ -122,11 +125,9 @@ void Dijkstra :: algo_de_dijk(Graphe & g ,const std::string & filename) {
         }
         
         updateGrille(g);
-
-
-        //affichage 
   
     }
+    //affichage 
     for(unsigned int i = 0; i< taille; i++){
              cout << " la distance a partir de " << i  <<"[" << g.altitudeIndice(i)<<"]" << " est " << PCD[i].dist <<endl;
              cout << " son predécesseur ::  " << PCD[i].pred  << endl;
@@ -135,10 +136,11 @@ void Dijkstra :: algo_de_dijk(Graphe & g ,const std::string & filename) {
 
 }
 
+
  int Dijkstra::ancestre(unsigned int i){
     if(PCD[i].pred != i)
     {
-        ancestre(PCD[i].pred);
+        ancestre(PCD[i].pred);//on cherche par recursivité l'ancestre
     }
     else{
         return i;
@@ -177,3 +179,6 @@ void Dijkstra::voronoi(Graphe & g,const std::string & filename){
         } */
 }
 
+/* Void VoronoiLivraison(Graphe & g,const std::string & filename){
+    cout<<"donnez des couts"
+} */
