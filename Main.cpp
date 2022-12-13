@@ -1,9 +1,9 @@
 #include "Dijkstra.h"
 
 using namespace std;
-int main(){
+int main(int argc, char * argv[]){
 
-    Graphe G ("./ExempleGraphe.txt") ;
+    Graphe G (argv[1]) ;
     G.afficher();
     G.setAltitude(3,6);
     cout << "changement de Sommet[4] -> valeur 7 "  << endl;
@@ -19,7 +19,8 @@ int main(){
      cout << G.valuation(0,1) << endl;
      cout << G.valuation(0,2) <<endl;   
     Dijkstra D (G);
-    D.algo_de_dijk(G , "CoordLibrairies.txt");
+    D.algo_de_dijk(G , argv[2]);
+    D.voronoi(G,argv[2]);
     return 0;
 
 }

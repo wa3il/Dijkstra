@@ -116,10 +116,6 @@ float Graphe::valuation(unsigned int a ,unsigned int b ){
 }
 
 
-
-
-
-
 //fct d'affichage
 void Graphe::afficher(){
     for(unsigned int i=0 ; i<l ; i++){
@@ -138,13 +134,12 @@ void Graphe::setAltitude(unsigned int S , float v){
 }
 
 
-
-
 //fct membre calculant l'arrete entre 2sommets 
     //cdt a et b existent et sont voisins 
 //float Graphe::valuation(unsigned int a){
 
 //accesseur
-unsigned int Graphe :: get_taille_tab(){return l*c;}
+unsigned int Graphe :: get_taille_l(){return l;}
+unsigned int Graphe :: get_taille_c(){return c;}
 
 float Graphe :: get_alt(unsigned int S ){return Sommet[S];}

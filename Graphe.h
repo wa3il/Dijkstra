@@ -58,7 +58,8 @@ class Graphe{
     void setAltitude(unsigned int S,float v);
 
     //accesseurs
-    unsigned int get_taille_tab();
+    unsigned int get_taille_l();
+    unsigned int get_taille_c();
 
     float get_alt(unsigned int S );
 };

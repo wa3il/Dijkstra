@@ -1,5 +1,5 @@
-all : Prog
-	./Prog
+all : Prog	
+	./Prog graphe.txt coord.txt 
 
 Prog : Main.o Graphe.o Dijkstra.o
 	g++ -Wall  Main.o Graphe.o Dijkstra.o -o Prog

@@ -6,7 +6,7 @@ using namespace std;
 float inf = std::numeric_limits<float>::infinity();
 
 Dijkstra ::Dijkstra(Graphe & g){
-    taille = g.get_taille_tab();
+    taille = g.get_taille_l() * g.get_taille_c();
     PCD = new Noeud [taille];
     for(unsigned int i = 0; i<taille ; i++){
          PCD[i].dist =  inf;
@@ -135,4 +135,45 @@ void Dijkstra :: algo_de_dijk(Graphe & g ,const std::string & filename) {
 
 }
 
+ int Dijkstra::ancestre(unsigned int i){
+    if(PCD[i].pred != i)
+    {
+        ancestre(PCD[i].pred);
+    }
+    else{
+        return i;
+    }
+}
+
+void Dijkstra::voronoi(Graphe & g,const std::string & filename){
+    vector<int> tabS = tab_lib( g , filename);
+
+    unsigned int l = g.get_taille_l();
+    unsigned int c = g.get_taille_c();
+    for(unsigned int i=0 ; i<l ; i++){
+        for(unsigned int j=0 ; j<c   ; j++){
+            for(unsigned s=0; s<tabS.size(); s++){
+                if (tabS[s] == ancestre(g.indiceSommet(i,j))){
+                if(tabS[s]== g.indiceSommet(i,j)){
+                    cout <<"\033[97m"<< "[" << g.get_alt(i*c + j) <<"]" ;
+                }
+                else{
+                    cout <<"\033[3"<<s<<"m"<< "[" << g.get_alt(i*c + j) <<"]" ;
+                }
+                
+                }
+
+            }
+            
+        }
+        cout <<endl;
+    }
+
+    /* for(unsigned j=0; j<tabS.size(); j++)
+        for(int i=0; i<taille; i++){
+            if (tabS[j] == ancestre(i)){
+                cout<< "\033[3"<<j<<"m"<< tabS[j] <<" ====> " << i <<endl;
+            }
+        } */
+}
 

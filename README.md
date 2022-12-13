@@ -8,11 +8,11 @@ Notre archive contient 9 fichiers
 --Dijkstra.cpp/Dijkstra.h : module Dijkstra utilisant un graphe
 
 
---Coordlibrairie.txt : fichier TXT 
+--coord.txt : fichier TXT 
  => 1ere ligne : nbre de librairies 
  => coordonnées des librairies. X Y séparèes par un espace " ".
-
---ExempleGraphe.txt :Fichier TXT
+s
+--graphe.txt :Fichier TXT
  => 1 ère ligne : L(lignes) C(Colonnes)
  => Hauteurs séparèes par un espace " ".
 

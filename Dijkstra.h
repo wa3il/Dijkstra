@@ -48,6 +48,11 @@ class Dijkstra{
         //algorithme de dijkstra a  partie dun graphe et un fichier
         void algo_de_dijk(Graphe & G ,const std::string & filename );
 
+
+        int ancestre(unsigned int i);
+
+        //pour chaque noeud on affiche son ancestre
+        void voronoi(Graphe & g,const std::string & filename);
         
      
 };
