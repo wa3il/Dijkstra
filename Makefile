@@ -1,5 +1,4 @@
-
-execute : Prog
+all : Prog
 	./Prog
 
 Prog : Main.o Graphe.o Dijkstra.o

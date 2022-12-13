@@ -3,6 +3,7 @@
 
 using namespace std;
 
+Graphe::Graphe():l(0),c(0),Sommet(nullptr){}
 
 Graphe::Graphe(unsigned int l , unsigned int c){
   this-> l = l ;
@@ -17,14 +18,34 @@ Graphe::Graphe(Graphe & G){
   this-> Sommet = G.Sommet ;
 }
 
+
+//a partir dun fichier
+Graphe::Graphe(const std::string & filename){
+
+    ifstream fichier (filename.c_str());
+    assert(fichier.is_open());
+
+    fichier>> l >> c;
+    Sommet = new float[l * c];
+
+    for(unsigned int i=0 ; i<l*c ; i++){
+          fichier>>Sommet[i];  
+     } 
+    
+    fichier.close();
+
+}
+
 //destructeur
 Graphe::~Graphe(){
     delete [] Sommet;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+
 //Renvoyer l'indice Global en fct de sa position (i,j)
 int Graphe::indiceSommet(unsigned int i ,unsigned int  j)const{
-    if(i<= l && j <= c) return i*c + j;
+    if(i< l && j < c) return i*c + j;
     else return -1;
 }
 
@@ -42,24 +63,26 @@ float Graphe::altitudeIndice( unsigned int i )const{
     else return -1;
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+
 //Prend en paramètre un voisin et un sens 
-//s => Sud , n=> Nord , o => Ouest , e => Est   
+//0 => Sud , 1=> Nord  , 2 => Est  , 3 => Ouest 
 //S'il existe , renvoyer son indice
-int Graphe::indiceVoisin(unsigned int i , const char d){
+int Graphe::indiceVoisin(unsigned int i , int d){
     switch (d){
-    case 's' :
+    case 0 :
     if (i + c <= l*c -1) return i+c ;
     else return -1;
     
-    case 'n' : 
+    case 1 : 
     if(i>=c) return i-c ;
     else return -1;
     
-    case 'e' :
+    case 2 :
     if(i%c <c-1 ) return i+1 ;
     else return -1;
     
-    case 'o' :
+    case 3 :
     if(i%c > 0) return i-1;
     else return -1; 
 
@@ -68,27 +91,33 @@ int Graphe::indiceVoisin(unsigned int i , const char d){
    
 }
 
-void Graphe::afficherVoisin(unsigned int i , const char d){
+void Graphe::afficherVoisin(unsigned int i , int d){
   
   cout << altitudeIndice(indiceVoisin(i , d)) << endl;
    
 }
 
-Graphe::Graphe(const std::string & filename){
-
-    ifstream fichier (filename.c_str());
-    assert(fichier.is_open());
-
-    fichier>> l >> c;
-    Sommet = new float[l * c];
-
-    for(unsigned int i=0 ; i<l*c ; i++){
-          fichier>>Sommet[i];  
-     } 
-    
-    fichier.close();
-
+bool Graphe::checkVoisin(int a , int b ){
+    bool trouve = false;
+    for(int i =0 ; i <4 ;i++){
+        if (Sommet[indiceVoisin(a,i)] == Sommet[b]) {  
+        trouve = true ;    
+        break;
+        }
+    }
+    return trouve;
 }
+
+//fct membre calculant l'arrete entre 2sommets 2 indices.
+    //cdt a et b existent et sont voisins 
+float Graphe::valuation(unsigned int a ,unsigned int b ){
+    if(checkVoisin(a,b))  return sqrt( 1 + pow((Sommet[a]-Sommet[b]),2)) ;
+    else return -1;
+}
+
+
+
+
 
 
 //fct d'affichage
